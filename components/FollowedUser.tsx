@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from "react"
 import axios from "axios"
-import UserCard, { LeetCodeStats } from "@/components/UserCard"
+import UserCard from "@/components/UserCard"
 import Leaderboard from "@/components/Leaderboard"
-import AnimatedButton from "@/components/AnimatedButton"
+import AnimatedButton from "@/components/AnimatedButtons"
 import { ClipLoader } from "react-spinners"
 import GridBackground from "@/components/GridBackground"
 
