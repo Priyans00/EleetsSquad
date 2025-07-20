@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import type { LeetCodeStats } from '@/components/UserCard'
+import type { LeetCodeStats } from '@/types/profile'
 
 interface LeaderboardProps {
   users: LeetCodeStats[]

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import type { LeetCodeStats } from "@/types/profile"
-import axios, { isAxiosError } from "axios"
+import axios from "axios"
 import UserCard from "@/components/UserCard"
 import Leaderboard from "@/components/Leaderboard"
 import AnimatedButton from "@/components/AnimatedButtons"
@@ -10,6 +10,15 @@ import { ClipLoader } from "react-spinners"
 import GridBackground from "@/components/GridBackground"
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL!
+
+function isAxiosError(error: unknown): error is { response?: { data?: { error?: string } } } {
+  return (
+    typeof error === "object" &&
+    error !== null &&
+    "isAxiosError" in error &&
+    (error as { isAxiosError?: boolean }).isAxiosError === true
+  );
+}
 
 export default function FollowedUsers() {
   const [followedStats, setFollowedStats] = useState<LeetCodeStats[]>([])
@@ -47,9 +56,9 @@ export default function FollowedUsers() {
       setError("")
     } catch (err: unknown) {
       if (isAxiosError(err)) {
-        setError(err.response?.data?.error || "Error unfollowing user")
+        setError(err.response?.data?.error || "Error unfollowing user");
       } else {
-        setError("Error unfollowing user")
+        setError("Error unfollowing user");
       }
     } finally {
       setLoading(false)
