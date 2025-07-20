@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useCallback } from "react"
+import { useState } from "react"
 import type { Profile, LeetCodeStats } from "@/types/profile"
-import _ from "lodash"
 import UserCard from "@/components/UserCard"
 import Leaderboard from "@/components/Leaderboard"
 import AnimatedButton from "@/components/AnimatedButtons"
@@ -48,8 +47,12 @@ export default function ProfileClient({ profile: initialProfile, token }: Props)
       const updateProfile = await res.json()
       setProfile(updateProfile)
       setUpdateUsername('')
-    } catch (err: any) {
-      setError(err.message || 'Error updating LeetCode username')
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error updating LeetCode username');
+      }
     } finally {
       setLoading(false)
     }
@@ -71,8 +74,12 @@ export default function ProfileClient({ profile: initialProfile, token }: Props)
       if (!res.ok) throw new Error('Failed to follow')
       await updateProfile()
       setFollowUsername('')
-    } catch (err: any) {
-      setError(err.message || 'Error following user')
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Error following user');
+      }
     } finally {
       setLoading(false)
     }

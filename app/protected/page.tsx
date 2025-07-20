@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
-import { InfoIcon } from "lucide-react"
-import GridBackground from "@/components/GridBackground"
 import type { Profile } from "@/types/profile"
 import ProfileClient from "@/components/ProfileClient"
 
