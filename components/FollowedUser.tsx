@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import type { LeetCodeStats } from "@/types/profile"
-import axios from "axios"
+import axios, { isAxiosError } from "axios"
 import UserCard from "@/components/UserCard"
 import Leaderboard from "@/components/Leaderboard"
 import AnimatedButton from "@/components/AnimatedButtons"
@@ -46,7 +46,7 @@ export default function FollowedUsers() {
       setFollowedStats((prev) => prev.filter((stat) => stat.username !== username))
       setError("")
     } catch (err: unknown) {
-      if (typeof err === "object" && err !== null && "isAxiosError" in err && axios.isAxiosError(err)) {
+      if (isAxiosError(err)) {
         setError(err.response?.data?.error || "Error unfollowing user")
       } else {
         setError("Error unfollowing user")
